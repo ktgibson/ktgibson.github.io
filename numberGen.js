@@ -32,8 +32,9 @@ function init(){
                     }
                 }else{
                     createResetButton();
+                    guessBtn.className = "nes-btn is-disabled";
+                    guessBtn.disabled = true;
                     title.innerText = (`You beat me, human... ${rando} was the correct number.`); //win!
-                    guessBtn.disabled = true; //disable submit button;
                     title.style.color = "forestgreen"; //change color
                     triesLeft.innerText = "WINNER"; //set triesleft text to winner!
                 }
@@ -49,7 +50,8 @@ function init(){
             triesLeft.innerText = "0"; //set tries to 0
             userInput.value = '';
             userInput.setAttribute("placeholder", "You're a failure...");
-            guessBtn.disabled = true; //disable submit button
+            guessBtn.className = "nes-btn is-disabled";
+            guessBtn.disabled = true;
         }
     }
 
