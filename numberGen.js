@@ -37,7 +37,7 @@ function init(){
                     title.innerText = (`You beat me, human... ${rando} was the correct number.`); //win!
                     triesLeft.innerText = "WINNER"; //set triesleft text to winner!
                     title.style.color = "#89C171"; //change color
-                    triesLeft.style.color = "#89C171"
+                    triesLeft.style.color = "#89C171";
                 }
             }else{
                 title.innerText = ("ERROR: INVALID NUMBER"); //enter number in range
