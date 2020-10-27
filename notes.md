@@ -1,3 +1,0 @@
-- if number already guessed, throw error
-- closest guess!
-- clean up global vars
