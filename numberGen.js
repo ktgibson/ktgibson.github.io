@@ -1,7 +1,7 @@
 function init(){
     //set init vars
     let guessArr = [];
-    let rando = Math.floor(Math.random() * 51);
+    let randomNumber = Math.floor(Math.random() * 51);
     let triesRemaining = 10;
 
     //get page elements
@@ -10,60 +10,89 @@ function init(){
     let title = document.getElementById("title");
     let guessBtn = document.getElementById("guessBtn");
     let triesLeft = document.getElementById("triesLeft");
+    let highLow = document.getElementById("highLow");
 
-    //when submit button is clicked
+    //reset user input field on reload
+    resetUserInputField();
+
+    //Run function `numberGen` when guess button is clicked
     guessBtn.onclick = function() {numberGen()};
 
+    // Main function
     function numberGen(){
-            if(userInput.value >= 0 && userInput.value <= 50 && userInput.value != ''){ //if the input is within range
-                if(userInput.value != rando){ // if the number was not just guesses
-                    if(!guessArr.includes(userInput.value)){ //check if array has duplicate value
-                        if(guessArr.length < 9){ // if length of guesses array is < 10
-                            guessArr.push(userInput.value); // add user input to array
-                            guessArea.innerText = guessArr; //print whole array on text area
-                            title.innerText = "Guess the Number between 1 & 50"; //reset the title
-                            triesRemaining -= 1; //subtract 1 from triesRemaining
-                            triesLeft.innerText = String(triesRemaining);//set tries remaining
-                            userInput.value = ""; //reset userinput
-                            userInput.focus(); //focus textbox
-                            colorChange(); //change color based on tried left
+            if(userInput.value >= 0 && userInput.value <= 50 && userInput.value != ''){
+                if(userInput.value != randomNumber){
+                    if(!guessArr.includes(userInput.value)){
+                        if(guessArr.length < 9){
+                            guessArr.push(userInput.value);
+                            guessArea.innerText = guessArr;
+                            triesRemaining -= 1;
+                            triesLeft.innerText = String(triesRemaining);
+                            title.innerText = ("Guess the Number between 1 & 50");
+                            highOrLow();
+                            resetUserInputField();
+                            colorChange();
                     } else{
                             createResetButton();
-                            guessArr.push(userInput.value); //push last guess
-                            guessArea.innerText = guessArr; //set last guess to area text
-                            title.innerText = (`Stupid human.. The number was ${rando}`); //notify player of the number
+                            guessArr.push(userInput.value);
+                            guessArea.innerText = guessArr;
+                            title.innerText = (`Stupid human.. The number was ${randomNumber}`);
                             title.style.color = "red";
-                            triesLeft.innerText = "0"; //set tries to 0
+                            triesLeft.innerText = "0";
                             userInput.value = '';
                             userInput.setAttribute("placeholder", "You're a failure...");
-                            guessBtn.disabled = true; //disable submit button
+                            guessBtn.disabled = true;
                     }
                     }else{
-                        title.innerText = "NO DUPLICATES!"; //throw error if duplicate number
+                        title.innerText = "NO DUPLICATES!";
+                        resetUserInputField();
                     }
                 }else{
                     createResetButton();
-                    guessBtn.className = "nes-btn is-disabled";
+                    title.innerText = (`You beat me, human... ${randomNumber} was the correct number.`);
                     guessBtn.disabled = true;
-                    title.innerText = (`You beat me, human... ${rando} was the correct number.`); //win!
-                    triesLeft.innerText = "WINNER"; //set triesleft text to winner!
-                    title.style.color = "#89C171"; //change color
-                    triesLeft.style.color = "#89C171";
+                    title.style.color = "forestgreen"; 
+                    highLow.innerText = "WINNER!";
+                    highLow.style.color = "forestgreen";
+                    highLow.style.fontSize = "3em";
                 }
             }else{
-                title.innerText = ("ERROR: INVALID NUMBER"); //enter number in range
+                title.innerText = ("ERROR: INVALID NUMBER");
+                resetUserInputField();
             }
+    } 
+
+    // Give high or low hints on guess
+    function highOrLow(){
+        let diff = Math.abs(parseInt(userInput.value) - randomNumber);
+
+        if(userInput.value < randomNumber){
+            highLow.innerText = ("Too low!");
+        }else if(diff <= 3){
+            highLow.innerText = ("You're so close!");
+        }else{
+            highLow.innerText = ("Too high!");
+        }
     }
 
+    // Create the reset button and append to btnContainer
     function createResetButton(){
-        var resetBtn = document.createElement("button"); //create element button
-        document.getElementById("btnContainer").append(resetBtn); //append button to the btn container
-        resetBtn.innerHTML = "Try Again"; //set button text to 'try again'
-        resetBtn.setAttribute("id","resetBtn"); //set attribute id to "reesetBtn"
+        var resetBtn = document.createElement("button");
+        document.getElementById("btnContainer").append(resetBtn);
+        resetBtn.innerHTML = "Try Again";
+        resetBtn.setAttribute("id","resetBtn");
         resetBtn.setAttribute("class","nes-btn is-error")
-        resetBtn.setAttribute("onClick", "resetGame()"); //Set attribute 'onClick' to run function resetGame()
+        resetBtn.setAttribute("onClick", "resetGame()");
     }
 
+    // Reset user input field
+    function resetUserInputField(){
+        userInput.value='';
+        userInput.setAttribute("placeholder", "Enter your guess..")
+        userInput.focus();
+    }
+
+    //Handle color change on tries remaining
     function colorChange(){
         if(triesRemaining > 3 && triesRemaining <= 6){
             triesLeft.style.color = "yellow";
@@ -73,8 +102,9 @@ function init(){
     }
 }
 
+// Reload page on button press
 function resetGame(){
-    window.location.reload(); //reload page on button press
+    window.location.reload();
 }
 
 window.addEventListener('load', init);
