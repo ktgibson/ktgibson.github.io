@@ -53,21 +53,6 @@ function init(){
             }else{
                 title.innerText = ("ERROR: INVALID NUMBER"); //enter number in range
             }
-<<<<<<< HEAD
-=======
-        }else{
-            createResetButton();
-            guessArr.push(userInput.value); //push last guess
-            guessArea.innerText = guessArr; //set last guess to area text
-            title.innerText = (`Stupid human.. The number was ${rando}`); //notify player of the number
-            title.style.color = "red";
-            triesLeft.innerText = "0"; //set tries to 0
-            userInput.value = '';
-            userInput.setAttribute("placeholder", "You're a failure...");
-            guessBtn.className = "nes-btn is-disabled";
-            guessBtn.disabled = true;
-        }
->>>>>>> bc8c1f8555eb2b6bf1798f4a37f2203e3ed3cfae
     }
 
     function createResetButton(){
