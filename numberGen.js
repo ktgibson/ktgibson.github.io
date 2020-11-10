@@ -25,39 +25,39 @@ function init(){
                     if(!guessArr.includes(userInput.value)){
                         if(guessArr.length < 9){
                             guessArr.push(userInput.value);
-                            guessArea.innerText = guessArr;
+                            guessArea.textContent = guessArr;
                             triesRemaining -= 1;
-                            triesLeft.innerText = String(triesRemaining);
-                            title.innerText = ("Guess the Number between 1 & 50");
+                            triesLeft.textContent = String(triesRemaining);
+                            title.textContent = ("Guess the Number between 1 & 50");
                             highOrLow();
                             resetUserInputField();
                             colorChange();
                     } else{
                             createResetButton();
                             guessArr.push(userInput.value);
-                            guessArea.innerText = guessArr;
-                            title.innerText = (`Stupid human.. The number was ${randomNumber}`);
+                            guessArea.textContent = guessArr;
+                            title.textContent = (`Stupid human.. The number was ${randomNumber}`);
                             title.style.color = "red";
-                            triesLeft.innerText = "0";
+                            triesLeft.textContent = "0";
                             userInput.value = '';
                             userInput.setAttribute("placeholder", "You're a failure...");
                             guessBtn.disabled = true;
                     }
                     }else{
-                        title.innerText = "NO DUPLICATES!";
+                        title.textContent = "NO DUPLICATES!";
                         resetUserInputField();
                     }
                 }else{
                     createResetButton();
-                    title.innerText = (`You beat me, human... ${randomNumber} was the correct number.`);
+                    title.textContent = (`You beat me, human... ${randomNumber} was the correct number.`);
                     guessBtn.disabled = true;
                     title.style.color = "forestgreen"; 
-                    highLow.innerText = "WINNER!";
+                    highLow.textContent = "WINNER!";
                     highLow.style.color = "forestgreen";
                     highLow.style.fontSize = "3em";
                 }
             }else{
-                title.innerText = ("ERROR: INVALID NUMBER");
+                title.textContent = ("ERROR: INVALID NUMBER");
                 resetUserInputField();
             }
     } 
@@ -67,11 +67,11 @@ function init(){
         let diff = Math.abs(parseInt(userInput.value) - randomNumber);
 
         if(userInput.value < randomNumber){
-            highLow.innerText = ("Too low!");
+            highLow.textContent = ("Too low!");
         }else if(diff <= 3){
-            highLow.innerText = ("You're so close!");
+            highLow.textContent = ("You're so close!");
         }else{
-            highLow.innerText = ("Too high!");
+            highLow.textContent = ("Too high!");
         }
     }
 
@@ -79,7 +79,7 @@ function init(){
     function createResetButton(){
         var resetBtn = document.createElement("button");
         document.getElementById("btnContainer").append(resetBtn);
-        resetBtn.innerHTML = "Try Again";
+        resetBtn.textContent = "Try Again";
         resetBtn.setAttribute("id","resetBtn");
         resetBtn.setAttribute("class","nes-btn is-error")
         resetBtn.setAttribute("onClick", "resetGame()");
