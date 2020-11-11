@@ -11,18 +11,22 @@
 </head>
 <body>
     <div class="container" id="container">
-        <div id="title">Guess the Number between 1 & 50</div>
-        <input type="text" name="userInput" id="userInput" class="nes-input" placeholder="Enter your guess.." autofocus>
-        <div id="btnContainer">
-            <button type="button" class="nes-btn" id="guessBtn">Guess</button>
+        <div class="main">
+            <div id="title">Guess the Number between 1 & 50</div>
+            <input type="text" name="userInput" id="userInput" class="nes-input" placeholder="Enter your guess.." autofocus>
+            <div id="btnContainer">
+                <button type="button" class="nes-btn" id="guessBtn">Guess</button>
+            </div>
+            <div class="remainingText">Tries:</div>
+            <div id="triesLeft">10</div>
+            <div id="highLow">Goodluck!</div>
+            <!-- User guesses -->
+            <div class="userGuesses">Guesses:</div>
+            <textarea name="guessArea" id="guessArea" class="nes-textarea" cols="30" rows="1" disabled="disabled" draggable="false"></textarea>
         </div>
-        <div class="remainingText">Tries:</div>
-        <div id="triesLeft">10</div>
-        <div id="highLow">Goodluck!</div>
-        <!-- User guesses -->
-        <div class="userGuesses">Guesses:</div>
-        <textarea name="guessArea" id="guessArea" class="nes-textarea" cols="30" rows="1" disabled="disabled" draggable="false"></textarea>
-        <footer class="footer">Kyle Gibson 🚀</footer>
+        <div class="footer">
+        Kyle Gibson 🚀
+        </div>
     </div>
     <script src="numberGen.js"></script>
 </body>
